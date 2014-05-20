@@ -23,7 +23,7 @@
     "irc":"irc://irc.freenode.org/friendsofcake"
   },
   "require":{
-    "composer/installers":"*",
+    "composer/installers":"*"
   },
   "extra": {
     "installer-name": "NewRelic"
