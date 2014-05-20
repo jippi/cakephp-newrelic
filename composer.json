@@ -1,0 +1,31 @@
+{
+  "name":"jippi/cakephp-newrelic",
+  "version": "1.0.0",
+  "description":"CakePHP <3 NewRelic",
+  "type":"cakephp-plugin",
+  "keywords":[
+    "cakephp",
+    "newrelic",
+    "plugin"
+  ],
+  "homepage":"https://github.com/jippi/cakephp-newrelic",
+  "license":"MIT",
+  "authors":[
+    {
+      "name":"Christian Winther",
+      "role":"Author",
+      "homepage":"http://cakephp.nu/"
+    }
+  ],
+  "support":{
+    "source":"https://github.com/jippi/cakephp-newrelic",
+    "issues":"https://github.com/jippi/cakephp-newrelic/issues",
+    "irc":"irc://irc.freenode.org/friendsofcake"
+  },
+  "require":{
+    "composer/installers":"*",
+  },
+  "extra": {
+    "installer-name": "NewRelic"
+  }
+}
