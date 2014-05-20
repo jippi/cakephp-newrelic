@@ -6,6 +6,7 @@
   "keywords":[
     "cakephp",
     "newrelic",
+    "apm",
     "plugin"
   ],
   "homepage":"https://github.com/jippi/cakephp-newrelic",
