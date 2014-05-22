@@ -65,8 +65,8 @@ trait NewRelicTrait {
  *
  * @return void
  */
-	public function stop() {
-		NewRelic::getInstance()->stop();
+	public function stop($ignore = false) {
+		NewRelic::getInstance()->stop($ignore);
 	}
 
 /**
