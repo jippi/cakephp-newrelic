@@ -48,7 +48,7 @@ class NewRelic {
  * @param  string $name
  * @return void
  */
-	public function start($name) {
+	public function start($name = null) {
 		if (!$this->hasNewRelic()) {
 			return;
 		}
