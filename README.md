@@ -27,7 +27,7 @@ Include this snippet in `app/Console/AppShell.php`
 
 ### Controller
 
-Simply add `NewRelic.NewRelic` do your `$components` list
+Simply add `NewRelic.NewRelic` to your `$components` list
 
 ## app/webroot/index.php
 
