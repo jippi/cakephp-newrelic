@@ -135,6 +135,10 @@ class NewRelic {
 			return false;
 		}
 
+		if (!is_scalar($value)) {
+			$value = json_encode($value);
+		}
+
 		newrelic_add_custom_parameter($key, $value);
 	}
 
