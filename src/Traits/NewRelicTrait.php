@@ -1,6 +1,7 @@
 <?php
+namespace NewRelic\Traits;
 
-App::uses('NewRelic', 'NewRelic.Lib');
+use NewRelic\Lib\NewRelic;
 
 trait NewRelicTrait {
 

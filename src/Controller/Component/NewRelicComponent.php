@@ -1,7 +1,9 @@
 <?php
+namespace NewRelic\Controller\Component;
 
-App::uses('NewRelic', 'NewRelic.Lib');
-App::uses('NewRelicTrait', 'NewRelic.Trait');
+use Cake\Controller\Component;
+use Cake\Event\Event;
+use NewRelic\Traits\NewRelicTrait;
 
 /**
  * New Relic Component
@@ -20,8 +22,10 @@ class NewRelicComponent extends Component {
  * @param Controller $controller
  * @return void
  */
-	public function initialize(Controller $controller) {
-		$this->setName($controller->request);
+	public function beforeFilter(Event $event) {
+		$controller = $event->data['controller'];
+
+		$this->setName($event->data['request']);
 		$this->start();
 
 		if ($controller->Auth) {
