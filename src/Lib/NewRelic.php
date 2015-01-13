@@ -191,6 +191,24 @@ class NewRelic {
 	}
 
 /**
+ * Send an error to New Relic
+ *
+ * @param  [type] $code        [description]
+ * @param  [type] $description [description]
+ * @param  [type] $file        [description]
+ * @param  [type] $line        [description]
+ * @param  [type] $context     [description]
+ * @return [type]              [description]
+ */
+	public function sendError($code, $description, $file, $line, $context = null) {
+		if (!$this->hasNewRelic()) {
+			return;
+		}
+
+		newrelic_notice_error($code, $description, $file, $line, $context);
+	}
+
+/**
  * Set user attributes
  *
  * @param  string $user
