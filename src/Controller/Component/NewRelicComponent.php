@@ -23,11 +23,10 @@ class NewRelicComponent extends Component {
  * @return void
  */
 	public function beforeFilter(Event $event) {
-
-		$this->setName($event->data['request']);
+		$this->setName($event->subject->request);
 		$this->start();
 
-		$controller = $event->data['controller'];
+		$controller = $event->subject;
 		if (isset($controller->Auth)) {
 			$this->user($controller->Auth->user('id'), $controller->Auth->user('email'), '');
 		}
