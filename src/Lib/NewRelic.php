@@ -1,6 +1,8 @@
 <?php
 namespace NewRelic\Lib;
 
+use Exception;
+
 /**
  * Class to help work with NewRelic in PHP
  *
