@@ -2,6 +2,7 @@
 namespace NewRelic\Traits;
 
 use NewRelic\Lib\NewRelic;
+use Exception;
 
 trait NewRelicTrait {
 
