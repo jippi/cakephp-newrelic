@@ -2,6 +2,8 @@
 namespace NewRelic\Traits;
 
 use NewRelic\Lib\NewRelic;
+use Cake\Console\Shell;
+use Cake\Network\Request;
 use Exception;
 
 trait NewRelicTrait {
@@ -26,7 +28,7 @@ trait NewRelicTrait {
 			$name = $this->_deriveNameFromShell($name);
 		}
 
-		if ($name instanceof CakeRequest) {
+		if ($name instanceof Request) {
 			$name = $this->_deriveNameFromRequest($name);
 		}
 
@@ -191,7 +193,7 @@ trait NewRelicTrait {
  * @param  CakeRequest $request
  * @return string
  */
-	protected function _deriveNameFromRequest(CakeRequest $request) {
+	protected function _deriveNameFromRequest(Request $request) {
 		$name = [];
 
 		if ($request->prefix) {
