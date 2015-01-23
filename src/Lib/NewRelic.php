@@ -239,7 +239,7 @@ class NewRelic {
 			return;
 		}
 
-		foreach (static::$ignoreErrors as $errorMessage) {
+		foreach (static::$ignoredErrors as $errorMessage) {
 			if (false !== strpos($description, $errorMessage)) {
 				return;
 			}
