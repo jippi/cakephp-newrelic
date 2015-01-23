@@ -13,6 +13,12 @@ class NewRelic {
 
 	protected static $ignoredExceptions = [];
 
+	protected static $ignoredErrors = [];
+
+	protected static $serverVariables = [];
+
+	protected static $cookieVariables = [];
+
 /**
  * Change the application name
  *
@@ -171,6 +177,36 @@ class NewRelic {
 	}
 
 /**
+ * Ignore error strings
+ *
+ * @param  string $exception
+ * @return void
+ */
+	public static function ignoreError($error) {
+		static::$ignoredErrors = array_merge(static::$ignoredErrors, (array)$error);
+	}
+
+/**
+ * Server variables to collect
+ *
+ * @param  array $variables
+ * @return void
+ */
+	public static function collectServerVariables(array $variables) {
+		static::$serverVariables = array_merge(static::$serverVariables, (array)$variables);
+	}
+
+/**
+ * Cookie variables to collect
+ *
+ * @param  array $variables
+ * @return void
+ */
+	public static function collectCookieVariables(array $variables) {
+		static::$cookieVariables = array_merge(static::$cookieVariables, (array)$variables);
+	}
+
+/**
  * Send an exception to New Relic
  *
  * @param  Exception $exception
@@ -203,6 +239,12 @@ class NewRelic {
 			return;
 		}
 
+		foreach (static::$ignoreErrors as $errorMessage) {
+			if (false !== strpos($description, $errorMessage)) {
+				return;
+			}
+		}
+
 		newrelic_notice_error($code, $description, $file, $line, $context);
 	}
 
@@ -229,6 +271,31 @@ class NewRelic {
  */
 	public static function hasNewRelic() {
 		return extension_loaded('newrelic');
+	}
+
+/**
+ * Collect environmental data for the transaction
+ *
+ * @return void
+ */
+	public static function collect() {
+		static::parameter('_get', $_GET);
+		static::parameter('_post', $_POST);
+		static::parameter('_files', $_FILES);
+
+		foreach ($_SERVER as $key => $value) {
+			if (!in_array($key, static::$serverVariables)) {
+				continue;
+			}
+			static::parameter('server_' . strtolower($key), $value);
+		}
+
+		foreach ($_COOKIE as $key => $value) {
+			if (!in_array($key, static::$cookieVariables)) {
+				continue;
+			}
+			static::parameter('cookie_' . strtolower($key), $value);
+		}
 	}
 
 }
