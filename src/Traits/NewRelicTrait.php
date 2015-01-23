@@ -51,7 +51,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function applicationName($name) {
-		NewRelic::getInstance()->applicationName($name);
+		NewRelic::applicationName($name);
 	}
 
 /**
@@ -61,7 +61,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function start($name = null) {
-		NewRelic::getInstance()->start($this->_getTransactionName($name));
+		NewRelic::start($this->_getTransactionName($name));
 	}
 
 /**
@@ -70,7 +70,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function stop($ignore = false) {
-		NewRelic::getInstance()->stop($ignore);
+		NewRelic::stop($ignore);
 	}
 
 /**
@@ -79,7 +79,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function ignoreTransaction() {
-		NewRelic::getInstance()->ignoreTransaction();
+		NewRelic::ignoreTransaction();
 	}
 
 /**
@@ -88,7 +88,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function ignoreApdex() {
-		NewRelic::getInstance()->ignoreApdex();
+		NewRelic::ignoreApdex();
 	}
 
 /**
@@ -99,7 +99,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function parameter($key, $value) {
-		NewRelic::getInstance()->parameter($key, $value);
+		NewRelic::parameter($key, $value);
 	}
 
 /**
@@ -110,7 +110,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function metric($key, $value) {
-		NewRelic::getInstance()->metric($key, $value);
+		NewRelic::metric($key, $value);
 	}
 
 /**
@@ -120,7 +120,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function captureParams($capture) {
-		NewRelic::getInstance()->captureParams($capture);
+		NewRelic::captureParams($capture);
 	}
 
 /**
@@ -129,7 +129,7 @@ trait NewRelicTrait {
  * @param string $method
  */
 	public function addTracer($method) {
-		NewRelic::getInstance()->addTracer($method);
+		NewRelic::addTracer($method);
 	}
 
 /**
@@ -141,7 +141,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function user($user, $account, $product) {
-		NewRelic::getInstance()->user($user, $account, $product);
+		NewRelic::user($user, $account, $product);
 	}
 
 /**
@@ -151,7 +151,7 @@ trait NewRelicTrait {
  * @return void
  */
 	public function sendException(Exception $e) {
-		NewRelic::getInstance()->sendException($e);
+		NewRelic::sendException($e);
 	}
 
 /**

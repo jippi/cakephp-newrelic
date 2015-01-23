@@ -11,25 +11,7 @@ use Exception;
  */
 class NewRelic {
 
-/**
- * Static instance of NewRelic
- *
- * @var NewRelic
- */
-	protected static $_instance;
-
-/**
- * Get the singleton instance of NewRelic
- *
- * @return NewRelic
- */
-	public static function getInstance() {
-		if (static::$_instance === null) {
-			static::$_instance = new NewRelic();
-		}
-
-		return static::$_instance;
-	}
+	protected static $ignoredExceptions = [];
 
 /**
  * Change the application name
@@ -37,8 +19,8 @@ class NewRelic {
  * @param  string $name
  * @return void
  */
-	public function applicationName($name) {
-		if (!$this->hasNewRelic()) {
+	public static function applicationName($name) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -51,8 +33,8 @@ class NewRelic {
  * @param  string $name
  * @return void
  */
-	public function start($name = null) {
-		if (!$this->hasNewRelic()) {
+	public static function start($name = null) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -66,8 +48,8 @@ class NewRelic {
  * @param  boolean $ignore Should the statistics NewRelic gathered be discarded?
  * @return void
  */
-	public function stop($ignore = false) {
-		if (!$this->hasNewRelic()) {
+	public static function stop($ignore = false) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -79,8 +61,8 @@ class NewRelic {
  *
  * @return
  */
-	public function ignoreTransaction() {
-		if (!$this->hasNewRelic()) {
+	public static function ignoreTransaction() {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -92,8 +74,8 @@ class NewRelic {
  *
  * @return
  */
-	public function ignoreApdex() {
-		if (!$this->hasNewRelic()) {
+	public static function ignoreApdex() {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -106,8 +88,8 @@ class NewRelic {
  * @param  boolean $boolean
  * @return void
  */
-	public function captureParams($boolean) {
-		if (!$this->hasNewRelic()) {
+	public static function captureParams($boolean) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -119,8 +101,8 @@ class NewRelic {
  *
  * @param string $method
  */
-	public function addTracer($method) {
-		if (!$this->hasNewRelic()) {
+	public static function addTracer($method) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -133,8 +115,8 @@ class NewRelic {
  * @param string $key
  * @param mixed $value
  */
-	public function parameter($key, $value) {
-		if (!$this->hasNewRelic()) {
+	public static function parameter($key, $value) {
+		if (!static::hasNewRelic()) {
 			return false;
 		}
 
@@ -152,8 +134,8 @@ class NewRelic {
  * @param  integer|float $value
  * @return
  */
-	public function metric($key, $value) {
-		if (!$this->hasNewRelic()) {
+	public static function metric($key, $value) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -170,8 +152,8 @@ class NewRelic {
  * @param  string $method
  * @return void
  */
-	public function tracer($method) {
-		if (!$this->hasNewRelic()) {
+	public static function tracer($method) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -179,17 +161,31 @@ class NewRelic {
 	}
 
 /**
- * Send an exception to New Relic
+ * Ignore an exception class
  *
- * @param  Exception $e
+ * @param  string $exception
  * @return void
  */
-	public function sendException(Exception $e) {
-		if (!$this->hasNewRelic()) {
+	public static function ignoreException($exception) {
+		static::$ignoredExceptions = array_merge(static::$ignoredExceptions, (array)$exception);
+	}
+
+/**
+ * Send an exception to New Relic
+ *
+ * @param  Exception $exception
+ * @return void
+ */
+	public static function sendException(Exception $exception) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
-		newrelic_notice_error(null, $e);
+		if (false !== array_search(get_class($exception), static::$ignoredExceptions)) {
+			return;
+		}
+
+		newrelic_notice_error(null, $exception);
 	}
 
 /**
@@ -202,8 +198,8 @@ class NewRelic {
  * @param  [type] $context     [description]
  * @return [type]              [description]
  */
-	public function sendError($code, $description, $file, $line, $context = null) {
-		if (!$this->hasNewRelic()) {
+	public static function sendError($code, $description, $file, $line, $context = null) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -218,8 +214,8 @@ class NewRelic {
  * @param  string $product
  * @return void
  */
-	public function user($user, $account, $product) {
-		if (!$this->hasNewRelic()) {
+	public static function user($user, $account, $product) {
+		if (!static::hasNewRelic()) {
 			return;
 		}
 
@@ -231,7 +227,7 @@ class NewRelic {
  *
  * @return boolean
  */
-	public function hasNewRelic() {
+	public static function hasNewRelic() {
 		return extension_loaded('newrelic');
 	}
 
