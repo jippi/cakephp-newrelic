@@ -29,15 +29,6 @@ class NewRelicComponent extends Component {
 		}
 
 		$this->captureParams(true);
-
-		$this->addTracer('CakeRoute::match');
-		$this->addTracer('CrudComponent::executeAction');
-		$this->addTracer('Controller::render');
-		$this->addTracer('View::render');
-		$this->addTracer('View::element');
-		$this->addTracer('View::renderLayout');
-		$this->addTracer('DboSource::_execute');
-		$this->addTracer('AttemptChecker::attempt');
 	}
 
 }
