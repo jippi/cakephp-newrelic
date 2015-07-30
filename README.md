@@ -9,6 +9,13 @@ You can modify your files like this
 - NewRelicTrait trait
 - NewRelic.NewRelic
 
+## Installation
+
+```
+composer require jippi/cakephp-newrelic
+```
+
+
 ### Console
 
 Include this snippet in `app/Console/AppShell.php`
