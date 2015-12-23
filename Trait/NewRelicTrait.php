@@ -203,6 +203,11 @@ trait NewRelicTrait {
 		$name[] = $request->controller;
 		$name[] = $request->action;
 
+		$name = array_filter($name);
+		if (empty($name)) {
+			return $request->here;
+		}
+
 		$name = join('/', $name);
 
 		if ($request->ext) {
