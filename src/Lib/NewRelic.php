@@ -11,13 +11,13 @@ use Exception;
  */
 class NewRelic {
 
-	protected static $ignoredExceptions = [];
+    protected static $ignoredExceptions = [];
 
-	protected static $ignoredErrors = [];
+    protected static $ignoredErrors = [];
 
-	protected static $serverVariables = [];
+    protected static $serverVariables = [];
 
-	protected static $cookieVariables = [];
+    protected static $cookieVariables = [];
 
 /**
  * Change the application name
@@ -25,13 +25,13 @@ class NewRelic {
  * @param  string $name
  * @return void
  */
-	public static function applicationName($name) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function applicationName($name) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_set_appname($name);
-	}
+        newrelic_set_appname($name);
+    }
 
 /**
  * Start a New Relic transaction
@@ -39,14 +39,14 @@ class NewRelic {
  * @param  string $name
  * @return void
  */
-	public static function start($name = null) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function start($name = null) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_start_transaction(NEW_RELIC_APP_NAME);
-		newrelic_name_transaction($name);
-	}
+        newrelic_start_transaction(NEW_RELIC_APP_NAME);
+        newrelic_name_transaction($name);
+    }
 
 /**
  * End a New Relic transaction
@@ -54,39 +54,39 @@ class NewRelic {
  * @param  boolean $ignore Should the statistics NewRelic gathered be discarded?
  * @return void
  */
-	public static function stop($ignore = false) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function stop($ignore = false) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_end_transaction($ignore);
-	}
+        newrelic_end_transaction($ignore);
+    }
 
 /**
  * Ignore the current transaction
  *
  * @return
  */
-	public static function ignoreTransaction() {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function ignoreTransaction() {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_ignore_transaction();
-	}
+        newrelic_ignore_transaction();
+    }
 
 /**
  * Ignore the current apdex
  *
  * @return
  */
-	public static function ignoreApdex() {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function ignoreApdex() {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_ignore_apdex();
-	}
+        newrelic_ignore_apdex();
+    }
 
 /**
  * Should NewRelic capture params ?
@@ -94,26 +94,26 @@ class NewRelic {
  * @param  boolean $boolean
  * @return void
  */
-	public static function captureParams($boolean) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function captureParams($boolean) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_capture_params($boolean);
-	}
+        newrelic_capture_params($boolean);
+    }
 
 /**
  * Add custom tracer method
  *
  * @param string $method
  */
-	public static function addTracer($method) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function addTracer($method) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_add_custom_tracer($method);
-	}
+        newrelic_add_custom_tracer($method);
+    }
 
 /**
  * Add a custom parameter to the New Relic transaction
@@ -121,17 +121,17 @@ class NewRelic {
  * @param string $key
  * @param mixed $value
  */
-	public static function parameter($key, $value) {
-		if (!static::hasNewRelic()) {
-			return false;
-		}
+    public static function parameter($key, $value) {
+        if (!static::hasNewRelic()) {
+            return false;
+        }
 
-		if (!is_scalar($value)) {
-			$value = json_encode($value);
-		}
+        if (!is_scalar($value)) {
+            $value = json_encode($value);
+        }
 
-		newrelic_add_custom_parameter($key, $value);
-	}
+        newrelic_add_custom_parameter($key, $value);
+    }
 
 /**
  * Track a custom metric
@@ -140,17 +140,17 @@ class NewRelic {
  * @param  integer|float $value
  * @return
  */
-	public static function metric($key, $value) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function metric($key, $value) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		if (!is_numeric($value)) {
-			throw new CakeException('Value must be numeric');
-		}
+        if (!is_numeric($value)) {
+            throw new CakeException('Value must be numeric');
+        }
 
-		newrelic_custom_metric($key, $value);
-	}
+        newrelic_custom_metric($key, $value);
+    }
 
 /**
  * Add a custom method to have traced by NewRelic
@@ -158,13 +158,13 @@ class NewRelic {
  * @param  string $method
  * @return void
  */
-	public static function tracer($method) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function tracer($method) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_add_custom_tracer($method);
-	}
+        newrelic_add_custom_tracer($method);
+    }
 
 /**
  * Ignore an exception class
@@ -172,9 +172,9 @@ class NewRelic {
  * @param  string $exception
  * @return void
  */
-	public static function ignoreException($exception) {
-		static::$ignoredExceptions = array_merge(static::$ignoredExceptions, (array)$exception);
-	}
+    public static function ignoreException($exception) {
+        static::$ignoredExceptions = array_merge(static::$ignoredExceptions, (array)$exception);
+    }
 
 /**
  * Ignore error strings
@@ -182,9 +182,9 @@ class NewRelic {
  * @param  string $exception
  * @return void
  */
-	public static function ignoreError($error) {
-		static::$ignoredErrors = array_merge(static::$ignoredErrors, (array)$error);
-	}
+    public static function ignoreError($error) {
+        static::$ignoredErrors = array_merge(static::$ignoredErrors, (array)$error);
+    }
 
 /**
  * Server variables to collect
@@ -192,9 +192,9 @@ class NewRelic {
  * @param  array $variables
  * @return void
  */
-	public static function collectServerVariables(array $variables) {
-		static::$serverVariables = array_merge(static::$serverVariables, (array)$variables);
-	}
+    public static function collectServerVariables(array $variables) {
+        static::$serverVariables = array_merge(static::$serverVariables, (array)$variables);
+    }
 
 /**
  * Cookie variables to collect
@@ -202,9 +202,9 @@ class NewRelic {
  * @param  array $variables
  * @return void
  */
-	public static function collectCookieVariables(array $variables) {
-		static::$cookieVariables = array_merge(static::$cookieVariables, (array)$variables);
-	}
+    public static function collectCookieVariables(array $variables) {
+        static::$cookieVariables = array_merge(static::$cookieVariables, (array)$variables);
+    }
 
 /**
  * Send an exception to New Relic
@@ -212,17 +212,18 @@ class NewRelic {
  * @param  Exception $exception
  * @return void
  */
-	public static function sendException(Exception $exception) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function sendException(Exception $exception) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		if (false !== array_search(get_class($exception), static::$ignoredExceptions)) {
-			return;
-		}
+        $exceptionClass = get_class($exception);
+        if (in_array($exceptionClass, static::$ignoredExceptions)) {
+            return;
+        }
 
-		newrelic_notice_error(null, $exception);
-	}
+        newrelic_notice_error(null, $exception);
+    }
 
 /**
  * Send an error to New Relic
@@ -234,19 +235,19 @@ class NewRelic {
  * @param  [type] $context     [description]
  * @return [type]              [description]
  */
-	public static function sendError($code, $description, $file, $line, $context = null) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function sendError($code, $description, $file, $line, $context = null) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		foreach (static::$ignoredErrors as $errorMessage) {
-			if (false !== strpos($description, $errorMessage)) {
-				return;
-			}
-		}
+        foreach (static::$ignoredErrors as $errorMessage) {
+            if (false !== strpos($description, $errorMessage)) {
+                return;
+            }
+        }
 
-		newrelic_notice_error($code, $description, $file, $line, $context);
-	}
+        newrelic_notice_error($code, $description, $file, $line, $context);
+    }
 
 /**
  * Set user attributes
@@ -256,46 +257,46 @@ class NewRelic {
  * @param  string $product
  * @return void
  */
-	public static function user($user, $account, $product) {
-		if (!static::hasNewRelic()) {
-			return;
-		}
+    public static function user($user, $account, $product) {
+        if (!static::hasNewRelic()) {
+            return;
+        }
 
-		newrelic_set_user_attributes($user, $account, $product);
-	}
+        newrelic_set_user_attributes($user, $account, $product);
+    }
 
 /**
  * Check if the NewRelic PHP extension is loaded
  *
  * @return boolean
  */
-	public static function hasNewRelic() {
-		return extension_loaded('newrelic');
-	}
+    public static function hasNewRelic() {
+        return extension_loaded('newrelic');
+    }
 
 /**
  * Collect environmental data for the transaction
  *
  * @return void
  */
-	public static function collect() {
-		static::parameter('_get', $_GET);
-		static::parameter('_post', $_POST);
-		static::parameter('_files', $_FILES);
+    public static function collect() {
+        static::parameter('_get', $_GET);
+        static::parameter('_post', $_POST);
+        static::parameter('_files', $_FILES);
 
-		foreach ($_SERVER as $key => $value) {
-			if (!in_array($key, static::$serverVariables)) {
-				continue;
-			}
-			static::parameter('server_' . strtolower($key), $value);
-		}
+        foreach ($_SERVER as $key => $value) {
+            if (!in_array($key, static::$serverVariables)) {
+                continue;
+            }
+            static::parameter('server_' . strtolower($key), $value);
+        }
 
-		foreach ($_COOKIE as $key => $value) {
-			if (!in_array($key, static::$cookieVariables)) {
-				continue;
-			}
-			static::parameter('cookie_' . strtolower($key), $value);
-		}
-	}
+        foreach ($_COOKIE as $key => $value) {
+            if (!in_array($key, static::$cookieVariables)) {
+                continue;
+            }
+            static::parameter('cookie_' . strtolower($key), $value);
+        }
+    }
 
 }
