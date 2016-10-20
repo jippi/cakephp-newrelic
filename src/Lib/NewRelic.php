@@ -19,6 +19,8 @@ class NewRelic {
 
     protected static $cookieVariables = [];
 
+    protected static $currentTransactionName;
+
 /**
  * Change the application name
  *
@@ -47,8 +49,10 @@ class NewRelic {
         newrelic_start_transaction(NEW_RELIC_APP_NAME);
 
         if ($name) {
-            newrelic_name_transaction($name);
+            static::$currentTransactionName = $name;
         }
+
+        newrelic_name_transaction(static::$currentTransactionName);
     }
 
 /**

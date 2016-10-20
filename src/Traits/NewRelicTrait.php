@@ -13,7 +13,7 @@ trait NewRelicTrait {
  *
  * @var string
  */
-	protected $_name;
+	protected $_newrelicTransactionName;
 
 /**
  * Set the transaction name
@@ -25,14 +25,14 @@ trait NewRelicTrait {
  */
 	public function setName($name) {
 		if ($name instanceof Shell) {
-			$name = $this->_deriveNameFromShell($name);
+            $name = $this->_deriveNameFromShell($name);
 		}
 
 		if ($name instanceof Request) {
 			$name = $this->_deriveNameFromRequest($name);
 		}
 
-		$this->_name = $name;
+		$this->_newrelicTransactionName = $name;
 	}
 
 /**
@@ -41,7 +41,7 @@ trait NewRelicTrait {
  * @return string
  */
 	public function getName() {
-		return $this->_name;
+		return $this->_newrelicTransactionName;
 	}
 
 /**
@@ -165,7 +165,7 @@ trait NewRelicTrait {
 			return $name;
 		}
 
-		return $this->_name;
+		return $this->_newrelicTransactionName;
 	}
 
 /**
