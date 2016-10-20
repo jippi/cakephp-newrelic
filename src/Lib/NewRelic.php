@@ -45,7 +45,10 @@ class NewRelic {
         }
 
         newrelic_start_transaction(NEW_RELIC_APP_NAME);
-        newrelic_name_transaction($name);
+
+        if ($name) {
+            newrelic_name_transaction($name);
+        }
     }
 
 /**
