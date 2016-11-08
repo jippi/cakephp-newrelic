@@ -15,6 +15,8 @@ class NewRelic {
  */
 	protected static $_instance;
 
+	protected $currentTransactionName;
+
 /**
  * Get the singleton instance of NewRelic
  *
@@ -54,7 +56,12 @@ class NewRelic {
 		}
 
 		newrelic_start_transaction(NEW_RELIC_APP_NAME);
-		newrelic_name_transaction($name);
+
+		if ($name) {
+			$this->currentTransactionName = $name;
+		}
+
+		newrelic_name_transaction($this->currentTransactionName);
 	}
 
 /**
