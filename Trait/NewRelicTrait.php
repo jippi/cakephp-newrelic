@@ -143,10 +143,10 @@ trait NewRelicTrait {
 /**
  * Send an exception to New Relic
  *
- * @param  Exception $e
+ * @param  Throwable $e
  * @return void
  */
-	public function sendException(Exception $e) {
+	public function sendException(Throwable $e) {
 		NewRelic::getInstance()->sendException($e);
 	}
 

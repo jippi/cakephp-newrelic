@@ -178,10 +178,10 @@ class NewRelic {
 /**
  * Send an exception to New Relic
  *
- * @param  Exception $e
+ * @param  Throwable $e
  * @return void
  */
-	public function sendException(Exception $e) {
+	public function sendException(Throwable $e) {
 		if (!$this->hasNewRelic()) {
 			return;
 		}
