@@ -216,10 +216,10 @@ class NewRelic {
 /**
  * Send an exception to New Relic
  *
- * @param  Exception $exception
+ * @param  Exception|Throwable $exception
  * @return void
  */
-    public static function sendException(Exception $exception) {
+    public static function sendException($exception) {
         if (!static::hasNewRelic()) {
             return;
         }
