@@ -77,3 +77,51 @@ if (extension_loaded('newrelic')) {
 
 // Rest of your cake.php file here
 ```
+
+### Remark if using > CakePHP 3.3.0 and using middleware
+If you utilise CakePHP middlewares from https://book.cakephp.org/3.0/en/controllers/middleware.html 
+
+You can use the supplied `NewRelicErrorHandlerMiddleware` placed in `NewRelic\Middleware\NewRelicErrorHandlerMiddleware` which extends the built in `Cake\Error\Middleware\ErrorHandlerMiddleware`. By using this you'll get the NewRelic working *and* have default CakePHP behavior.
+
+Example:
+
+```php
+<?php
+
+namespace App;
+
+use Cake\Http\BaseApplication;
+use Cake\Routing\Middleware\AssetMiddleware;
+use Cake\Routing\Middleware\RoutingMiddleware;
+
+/**
+ * Application setup class.
+ *
+ * This defines the bootstrapping logic and middleware layers you
+ * want to use in your application.
+ */
+class Application extends BaseApplication
+{
+    /**
+     * Setup the middleware your application will use.
+     *
+     * @param \Cake\Http\MiddlewareQueue $middleware The middleware queue to setup.
+     * @return \Cake\Http\MiddlewareQueue The updated middleware.
+     */
+    public function middleware($middleware)
+    {
+        $middleware
+            // Catch any exceptions in the lower layers,
+            // and make an error page/response
+            ->add(\NewRelic\Middleware\NewRelicErrorHandlerMiddleware)
+            // Handle plugin/theme assets like CakePHP normally does.
+            ->add(AssetMiddleware::class)
+            // Apply routing
+            ->add(RoutingMiddleware::class);
+	    
+        return $middleware;
+    }
+}
+
+?>
+```
