@@ -1,6 +1,6 @@
 # CakePHP <3 NewRelic
 
-You can modify your files like this
+You can modify your files like this to have full NewRelic support.
 
 ## Things included
 
@@ -9,9 +9,18 @@ You can modify your files like this
 - NewRelicTrait trait
 - NewRelic.NewRelic
 
-### Console
+## Installation
 
-Include this snippet in `app/Console/AppShell.php`
+Note: This branch is for CakePHP 3.
+
+```
+composer require jippi/cakephp-newrelic:
+```
+
+
+### Shell
+
+Include this snippet in `src/Shell/AppShell.php`
 
 ```php
 	public function startup() {
@@ -29,12 +38,11 @@ Include this snippet in `app/Console/AppShell.php`
 
 Simply add `NewRelic.NewRelic` to your `$components` list
 
-## app/webroot/index.php
+## webroot/index.php
 
 Add this in top of your file before `define('DS', 'DIRECTORY_SEPARATOR')`
 
 ```php
-<?php
 require_once dirname(dirname(__DIR__)) . '/vendors/autoload.php';
 
 if (extension_loaded('newrelic')) {
@@ -55,10 +63,9 @@ if (extension_loaded('newrelic')) {
 // Rest of your index.php here
 ```
 
-## app/Console/cake.php
+## bin/cake.php
 
 ```php
-<?php
 require_once dirname(dirname(__DIR__)) . '/vendors/autoload.php';
 
 if (extension_loaded('newrelic')) {
