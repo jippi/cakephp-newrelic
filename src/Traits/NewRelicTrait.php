@@ -196,21 +196,21 @@ trait NewRelicTrait {
 	protected function _deriveNameFromRequest(Request $request) {
 		$name = [];
 
-		if ($request->prefix) {
-			$name[] = $request->prefix;
+		if ($request->getParam('prefix')) {
+			$name[] = $request->getParam('prefix');
 		}
 
-		if ($request->plugin) {
-			$name[] = $request->plugin;
+		if ($request->getParam('plugin')) {
+			$name[] = $request->getParam('plugin');
 		}
 
-		$name[] = $request->controller;
-		$name[] = $request->action;
+		$name[] = $request->getParam('controller');
+		$name[] = $request->getParam('action');
 
 		$name = join('/', $name);
 
-		if ($request->ext) {
-			$name .= '.' . $request->ext;
+		if ($request->getParam('ext')) {
+			$name .= '.' . $request->getParam('ext');
 		}
 
 		return $name;
