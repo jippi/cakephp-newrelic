@@ -95,7 +95,7 @@ trait NewRelicTrait {
  * Add custom parameter to transaction
  *
  * @param  string $key
- * @param  scalar $value
+ * @param  integer|float|string|boolean $value
  * @return void
  */
 	public function parameter($key, $value) {
