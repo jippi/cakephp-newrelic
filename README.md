@@ -9,6 +9,9 @@ You can modify your files like this to have full NewRelic support.
 - NewRelicTrait trait
 - NewRelic.NewRelic
 
+## Requirements
+- [New Relic PHP agent](https://docs.newrelic.com/docs/agents/php-agent/getting-started/introduction-new-relic-php) installed as a PHP module
+
 ## Installation
 
 Note: This branch is for CakePHP 3.4 and newer
