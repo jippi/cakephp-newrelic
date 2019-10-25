@@ -195,13 +195,13 @@ trait NewRelicTrait {
  */
 	protected function _deriveNameFromRequest(Request $request) {
 		$name = [];
+		
+		if ($request->getParam('plugin')) {
+			$name[] = $request->getParam('plugin');
+		}		
 
 		if ($request->getParam('prefix')) {
 			$name[] = $request->getParam('prefix');
-		}
-
-		if ($request->getParam('plugin')) {
-			$name[] = $request->getParam('plugin');
 		}
 
 		$name[] = $request->getParam('controller');
