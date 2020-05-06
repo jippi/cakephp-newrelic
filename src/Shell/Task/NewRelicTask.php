@@ -1,10 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace NewRelic\Shell\Task;
 
-use App\Shell\AppShell;
+use Cake\Console\Shell;
 use NewRelic\Traits\NewRelicTrait;
 
-class NewRelicTask extends AppShell {
+class NewRelicTask extends Shell {
 
 	use NewRelicTrait;
 
