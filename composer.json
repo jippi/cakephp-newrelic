@@ -1,27 +1,27 @@
 {
-  "name":"jippi/cakephp-newrelic",
+  "name": "jippi/cakephp-newrelic",
   "version": "1.0.0",
-  "description":"CakePHP <3 NewRelic",
-  "type":"cakephp-plugin",
-  "keywords":[
+  "description": "CakePHP <3 NewRelic",
+  "type": "cakephp-plugin",
+  "keywords": [
     "cakephp",
     "newrelic",
     "apm",
     "plugin"
   ],
-  "homepage":"https://github.com/jippi/cakephp-newrelic",
-  "license":"MIT",
-  "authors":[
+  "homepage": "https://github.com/jippi/cakephp-newrelic",
+  "license": "MIT",
+  "authors": [
     {
-      "name":"Christian Winther",
-      "role":"Author",
-      "homepage":"http://cakephp.nu/"
+      "name": "Christian Winther",
+      "role": "Author",
+      "homepage": "http://cakephp.nu/"
     }
   ],
-  "support":{
-    "source":"https://github.com/jippi/cakephp-newrelic",
-    "issues":"https://github.com/jippi/cakephp-newrelic/issues",
-    "irc":"irc://irc.freenode.org/friendsofcake"
+  "support": {
+    "source": "https://github.com/jippi/cakephp-newrelic",
+    "issues": "https://github.com/jippi/cakephp-newrelic/issues",
+    "irc": "irc://irc.freenode.org/friendsofcake"
   },
   "require": {
     "cakephp/cakephp": "^4.0"
@@ -31,7 +31,7 @@
     "cakephp/cakephp-codesniffer": "^4.0",
     "phpstan/phpstan": "^0.12.18",
     "psalm/phar": "~3.11.2"
-},
+  },
   "autoload": {
     "psr-4": {
       "NewRelic\\": "src",
