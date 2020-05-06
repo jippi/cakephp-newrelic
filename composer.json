@@ -24,13 +24,14 @@
     "irc":"irc://irc.freenode.org/friendsofcake"
   },
   "require": {
-    "cakephp/cakephp": "~3.0",
-    "cakephp/plugin-installer": "*"
+    "cakephp/cakephp": "^4.0"
   },
   "require-dev": {
-    "cakephp/cakephp-codesniffer": "dev-master",
-    "phpunit/phpunit": "4.1.*"
-  },
+    "phpunit/phpunit": "*",
+    "cakephp/cakephp-codesniffer": "^4.0",
+    "phpstan/phpstan": "^0.12.18",
+    "psalm/phar": "~3.11.2"
+},
   "autoload": {
     "psr-4": {
       "NewRelic\\": "src",
